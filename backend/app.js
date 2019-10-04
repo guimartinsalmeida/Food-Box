@@ -10,6 +10,7 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('./config/passport');
 
+
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
@@ -45,12 +46,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('dev'));
 
-const index = require('./routes/index');
-const auth = require('./routes/auth');
+const index = require('./routes/index')
 const plan = require('./routes/plan')
-app.use('/', index);
-app.use('/', auth);
-app.use('/', plan )
+app.use('/api', index)
+app.use('/api', plan )
 
 
 // Uncomment this line for production
