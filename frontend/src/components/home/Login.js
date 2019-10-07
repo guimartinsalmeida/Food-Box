@@ -1,31 +1,33 @@
-import React, { Component } from 'react';
-import { Card, Input, Form } from 'antd';
+import React, { Component } from 'react'
+import { Card, Input, Form } from 'antd'
 import AUTH_SERVICE from '../../services/index'
-import { MyContext } from '../../context';
+import { MyContext } from '../../context'
 
 class Login extends Component {
   state = {
     user: {}
-  };
+  }
 
-  handleInput = (e) => {
-    const { user } = this.state;
-    const key = e.target.name;
-    user[key] = e.target.value;
-    this.setState({ user });
-  };
+  handleInput = e => {
+    const { user } = this.state
+    const key = e.target.name
+    user[key] = e.target.value
+    this.setState({ user })
+  }
 
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = e => {
+    e.preventDefault()
     AUTH_SERVICE.login(this.state.user)
-      .then((response) => {
-        this.context.logUser(response.data.user);
-        this.props.history.push('/');
+      .then(response => {
+        localStorage.setItem('user', JSON.stringify(response.data.user))
+        //this.context.logUser(response.data.user)
+        let plan = JSON.parse(localStorage.getItem('plan'))
+        this.props.history.push(`/places/${plan}`)
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   render() {
     return (
@@ -46,23 +48,23 @@ class Login extends Component {
               <Input onChange={this.handleInput} type="email" name="email" placeholder="Email" />
             </Form.Item>
             <Form.Item>
-              <Input
-                onChange={this.handleInput}
-                type="password"
-                name="password"
-                placeholder="Password"
-              />
+              <Input onChange={this.handleInput} type="password" name="password" placeholder="Password" />
             </Form.Item>
             <Form.Item>
               <Input type="submit" value="Login" />
             </Form.Item>
+           
           </Form>
+          <a href="/signup">
+             <button>vete a hacer signup</button>
+           </a>
         </Card>
+        
       </div>
-    );
+    )
   }
 }
 
-Login.contextType = MyContext;
+Login.contextType = MyContext
 
-export default Login;
+export default Login

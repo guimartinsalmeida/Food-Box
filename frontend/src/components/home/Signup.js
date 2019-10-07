@@ -18,6 +18,7 @@ class Signup extends Component {
     e.preventDefault();
     AUTH_SERVICE.signup(this.state.user)
       .then((response) => {
+        this.props.history.push("/login");
         console.log(response.data);
       })
       .catch((error) => {

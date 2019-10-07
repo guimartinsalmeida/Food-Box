@@ -2,7 +2,10 @@ import React from 'react'
 import Axios from 'axios'
 import { Form, DatePicker, TimePicker, Button, Card } from 'antd';
 import 'antd/dist/antd.css'
+import DATE_SERVICE, { pedidoService } from '../../services/post-date'
+import { MyContext } from '../../context';
 const { MonthPicker, RangePicker } = DatePicker;
+
 
 const baseURL = process.env.NODE_ENV === 'production'
   ? 'here should be your production endpoint'
@@ -10,9 +13,40 @@ const baseURL = process.env.NODE_ENV === 'production'
 
   class Pedido extends React.Component{
     state ={
-      places:{},
-      unplan:{}
+      pedido:{
+        fecha:'',
+        hora:''
+      },
+      unplan:{},
+      user:{}
     }
+    handleInput = e => {
+      const { user } = this.state
+      const key = e.target.name
+      user[key] = e.target.value
+      this.setState({ user })
+      console.log(this.state.user)
+      console.log(e.target.name)
+    }
+  
+    onSubmit = e => {
+      e.preventDefault()
+      let{user} = this.state
+      console.log('onsubmit', user)
+      pedidoService(user)
+      .then(res => console.log('la respuesta en onsubment', res))
+
+      .catch(err => console.log('el error en onsubmit', err))
+    }
+
+     // DATE_SERVICE.postdate(this.state.user)
+       // .then(response => {
+         // this.props.history.push('/createPedido')
+        //})
+        //.catch(error => {
+          //console.log(error)
+        //})
+    //}
     componentDidMount() {
       Axios.get(`${baseURL}/selectedPlan/${this.props.match.params.id}`)
         .then(({ data }) => {
@@ -23,7 +57,7 @@ const baseURL = process.env.NODE_ENV === 'production'
         .catch(err => {
           console.log(err)
         })
-      
+    
     }
 
         
@@ -41,13 +75,14 @@ const baseURL = process.env.NODE_ENV === 'production'
           <img src={unplan.image} alt="" />
         </Card>
         <p>{unplan.name}</p>
-              
-              <Form.Item label="DatePicker">
+              <Form onSubmit={this.onSubmit}>
+              <Form.Item onChange={this.handleInput} name="fecha" label="DatePicker">
           <DatePicker />
         </Form.Item>
-        <Form.Item label="TimePicker">
+        <Form.Item onChange={this.handleInput} name="hora" label="TimePicker">
         <TimePicker />
       </Form.Item>
+      </Form>
       </div>
             );
           }

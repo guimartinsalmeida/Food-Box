@@ -1,12 +1,12 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom'
+import '../../index.css'
 function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      <a href="/plans">
-      <button> escoja tu plan</button>
-      </a>
+    <div className="home">
+      <h1>Food-Box</h1>
+      <Link to="/plans"> <button>escoja tu plan</button></Link>
+      
       
     </div>
   );

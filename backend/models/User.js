@@ -9,10 +9,7 @@ const userSchema = new Schema(
     },
     name: String,
     lastname: String,
-    location: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Place'
-    }]
+   
   },
   
   {
