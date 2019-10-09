@@ -11,7 +11,7 @@ const DATE_SERVICE = {
 
 export const pedidoService = data => {
   console.log('data', data)
-  return SERVICE.post('/places', data)
+  return SERVICE.post('api/places', data)
     .then(response => response.data)
     .catch(err => {
       throw err
