@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = 'https://vast-meadow-96941.herokuapp.com/api'
+const baseURL = 'https://vast-meadow-96941.herokuapp.com'
 
 const SERVICE = axios.create({ withCredentials: true, baseURL })
 

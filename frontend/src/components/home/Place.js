@@ -9,7 +9,7 @@ import AUTH_SERVICE from '../../services'
 const { Header, Content } = Layout
 
 const baseURL =
-  process.env.NODE_ENV === 'production' ? 'https://vast-meadow-96941.herokuapp.com/api' : 'http://localhost:3000/api'
+  process.env.NODE_ENV === 'production' ? 'https://vast-meadow-96941.herokuapp.com' : 'http://localhost:3000/api'
 
 class Place extends React.Component {
   state = {
