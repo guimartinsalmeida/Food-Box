@@ -26,7 +26,7 @@ const PLACE_SERVICE = {
 
 export const placeService = data => {
   console.log('data', data)
-  return SERVICE.post('/places', data)
+  return SERVICE.post('api/places', data)
     .then(response => response.data)
     .catch(err => {
       throw err
