@@ -7,17 +7,17 @@ const PLACE_SERVICE = {
   postaddress: async places => {
     console.log('llega a service;;;;' + Object.values(places))
     console.log(places)
-    return await SERVICE.post('/places', places)
+    return await SERVICE.post('api/places', places)
   },
   getPlace: async(places) => {
-    return await SERVICE.get('/places', places)
+    return await SERVICE.get('api/places', places)
   },
 
   onDelete: async(id)=>{
-    return await SERVICE.delete(`/places/${id}`)
+    return await SERVICE.delete(`api/places/${id}`)
   },
   onEdit: async(id, form)=>{
-    return await SERVICE.put(`/edit-places/${id}`, form)
+    return await SERVICE.put(`api/edit-places/${id}`, form)
   }
   //getAddress: async (userid) => {
     //return await SERVICE.get('/places', userid)
