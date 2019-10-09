@@ -11,6 +11,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.planes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
+.home {
+  background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&auto=format&fit=crop&w=631&q=80');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100vh;
+}
 
+.h1 {
+  text-align: center;
+  font-size: 150px;
+  color: black;
+}
 
+.food-box-card {
+  border: 1px solid black;
+  padding: 20px;
+  background-color: white;
+  width: 600px;
+  height: 400px;
+}
+
+.food-box-card {
+  margin-top: -10vh;
+  margin-right: 10vh;
+}
+
+.plans {
+  background-color: rgb(239, 243, 246);
+  height: 100vh;
+}
+
+.ant-layout-content {
+  background-color: rgb(239, 243, 246);
+}
+
+h1 {
+  color: white;
+}

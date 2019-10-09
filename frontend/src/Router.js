@@ -8,6 +8,7 @@ import Pedido from './components/home/Pedido'
 import Profile from './components/home/Profile'
 import Signup from './components/home/Signup'
 import Login from './components/home/Login'
+import Edit from './components/home/Edit'
 
 const Router = () => (
   <BrowserRouter>
@@ -19,7 +20,7 @@ const Router = () => (
       <Route exact path="/plans" component={Plan} />
       <Route exact path="/places/:id" component={Place} />
       <Route exact path="/pedidoCreate/:id" component={Pedido} />
-
+      <Route exact path="/edit/:id" component={Edit} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

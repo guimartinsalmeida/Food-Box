@@ -49,8 +49,8 @@ app.use(logger('dev'))
 
 const index = require('./routes/index')
 const plan = require('./routes/plan')
-//const place = require('./routes/Place')
-//app.use('/api' , places)
+const place = require('./routes/Place')
+app.use('/api' , place)
 app.use('/api', index)
 app.use('/api', plan)
 

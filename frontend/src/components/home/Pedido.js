@@ -1,10 +1,9 @@
 import React from 'react'
 import Axios from 'axios'
-import { Form, DatePicker, TimePicker, Button, Card } from 'antd';
+import { Form, DatePicker, TimePicker, Card } from 'antd';
 import 'antd/dist/antd.css'
 import DATE_SERVICE, { pedidoService } from '../../services/post-date'
-import { MyContext } from '../../context';
-const { MonthPicker, RangePicker } = DatePicker;
+
 
 
 const baseURL = process.env.NODE_ENV === 'production'

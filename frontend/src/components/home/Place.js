@@ -1,11 +1,12 @@
 import React from 'react'
 import Axios from 'axios'
-import { Form, Icon, Input, Button, Checkbox, Card } from 'antd'
+import { Form, Icon, Input, Card } from 'antd'
+import { Link } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import 'antd/dist/antd.css'
 import PLACE_SERVICE, { placeService } from '../../services/post-place'
-import { MyContext } from '../../context'
-const { Header, Content, Footer } = Layout
+import AUTH_SERVICE from '../../services'
+const { Header, Content } = Layout
 
 const baseURL =
   process.env.NODE_ENV === 'production' ? 'here should be your production endpoint' : 'http://localhost:3000/api'
@@ -14,33 +15,9 @@ class Place extends React.Component {
   state = {
     unplan: {},
     user: {},
-    places: {
-      name: '',
-      address: ''
-    }
+    places: [],
+    lugar: undefined
   }
-
-  handleInput = e => {
-    const { user } = this.state
-    const key = e.target.name
-    user[key] = e.target.value
-    this.setState({ user })
-    console.log(this.state.user)
-    console.log(e.target.name)
-  }
-
-  onSubmit = e => {
-    e.preventDefault()
-    let { user } = this.state
-    console.log('onsubmit', user)
-    placeService(user)
-      .then(res => console.log('la respuesta en onsubment', res))
-      
-      .catch(err => console.log('el error en onsubmit', err))
-  }
-
-
-
   componentDidMount() {
     if (!localStorage.getItem('user')) return this.props.history.push('/login')
     Axios.get(`${baseURL}/selectedPlan/${this.props.match.params.id}`)
@@ -52,33 +29,90 @@ class Place extends React.Component {
       .catch(err => {
         console.log(err)
       })
-      
-    
+
+    Axios.get(`${baseURL}/places/`)
+      .then(res => {
+        let { places } = this.state
+        console.log('resasss',res)
+        this.setState({ places: res.data.place })
+        //console.log('este es el que quiere ver emiliano', res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  handleInput = e => {
+    const { user } = this.state
+    const key = e.target.name
+    user[key] = e.target.value
+    this.setState({ user })
+    console.log(this.state.user)
+    console.log(e.target.name)
   }
 
 
- // table = () => {
-   // return (this.state.places.map((x) => {
-      
-     //   return(
-       //     <tr key={x.place}>
-         //       <th>{x.place}</th>
-           //     <td>{x.name}</td>
-             //   <td>{x.address}</td>
-        //    </tr>
-        //)
-   // }))
-  //}
+  onDelete = async (id, index) => {
+    let{places} = this.state
+    await PLACE_SERVICE.onDelete(id)
+    places.splice(index, 1);
+    this.setState({places})
+  }
+  
 
-  //placeTransform = async() => {
-    //const response = await PLACE_SERVICE.placeService(this.state.place._id)
-    //const arrayplaces = response.data.places
-    //this.setState({place: arrayplaces})
-//}
+  onLogout = async () => {
+    await AUTH_SERVICE.logOut()
+    localStorage.clear()
+    this.props.history.push('/login')
+  }
 
+  onSubmit = e => {
+    e.preventDefault()
+    Axios.get(`${baseURL}/places/${this.state.places.id}`) //
+      .then(({ data }) => {
+        //
+        console.log('2222222222222222222222', data)
+        this.setState({
+          //
+          lugares: data.place,
+          lugar: (
+            <Card>
+              <p>{'kjscbkja'}</p>
+              <p>{'kajcbikjbc'}</p>
+            </Card>
+          )
+        }) //
+      }) //
+      .catch(err => {
+        //
+        console.log(err) //
+      }) //
+
+    let { user } = this.state
+    console.log('onsubmit', user)
+    placeService(user)
+      .then(res => {
+        let {places} = this.state
+        places.push(res.place)
+        console.log('.......', res)
+        this.setState({
+        places
+        })
+      })
+
+      .catch(err => console.log('el error en onsubmit', err))
+  }
+
+  cardPlace = () => {
+    const { places } = this.state
+    console.log('este es el id ', places[0])
+ 
+    console.log(places)
+  }
 
   render() {
     const { unplan } = this.state
+    const { places } = this.state
+    console.log(this.state)
     if (!unplan) return <p>Loading data...</p>
     //this.props.match.params.id
     return (
@@ -87,31 +121,65 @@ class Place extends React.Component {
           <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ lineHeight: '64px' }}>
-              <Menu.Item key="1">nav 1</Menu.Item>
-              <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
+              <Menu.Item key="3" onClick={this.onLogout}>
+                Log out
+              </Menu.Item>
             </Menu>
           </Header>
           <Content style={{ padding: '0 50px', marginTop: 64 }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
+              <Breadcrumb.Item>Put your address to receive your food plan</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
-              <Card style={{ width: 300 }}>
-                <h1>{unplan.name}</h1>
-                <p>{unplan.price}</p>
-                <p>{unplan.role}</p>
-                <p>{unplan.description}</p>
-                <img src={unplan.image} alt="" />
-              </Card>
-              
-              
+            <div>
+              <div
+                style={{
+                  background: '#fff',
+                  padding: 24,
+                  minHeight: 380,
+                  display: 'flex',
+                  justifyContent: 'space-around'
+                }}
+              >
+                <Card style={{ width: 300, height: '400px', backgroundImage: `url(${unplan.image})` }}>
+                  <h1>{unplan.name}</h1>
+                  <p>
+                    Price:<br></br>
+                    {unplan.price}
+                  </p>
+                  <p>
+                    Tipo:<br></br>
+                    {unplan.role}
+                  </p>
+                  <p>{unplan.description}</p>
+                </Card>
+                <div>{this.state.lugar}</div>
+                <div>
+                {places.length ? 
+                    places.map((place, i) => 
+                      <div key={i} style={{ background: '#ECECEC', padding: '30px' }}>
+                        <Card bordered={false} style={{ width: 300 }}>
+                          <h1>{place.name}</h1>
+                          <p>{place.address}</p>
+                          <button type="delete" id={place.id} key="delete" onClick={() => this.onDelete(place._id, i)}>
+                            delete
+                          </button>
+                          <Link to={`/edit/${place._id}`}>  <button type="edit" id={place.id} key="edit">
+                          Edit 
+                          </button> </Link>
+                        </Card>
+                      </div>
+                    )
+                   : 
+                    <div>
+                      <span>no hay nada mijo</span>
+                    </div>
+                }
+                </div>
+              </div>
+
               <p>{unplan.name}</p>
               <Form onSubmit={this.onSubmit} className="login-form">
                 <Form.Item>
-                
                   <Input
                     onChange={this.handleInput}
                     name="name"
@@ -131,9 +199,9 @@ class Place extends React.Component {
                   </Form.Item>
                 </Form.Item>
               </Form>
-              <a href={`/pedidoCreate/${unplan._id}`}>
+              <Link to={`/pedidoCreate/${unplan._id}`}>
                 <button>Add</button>
-              </a>
+              </Link>
             </div>
           </Content>
         </Layout>

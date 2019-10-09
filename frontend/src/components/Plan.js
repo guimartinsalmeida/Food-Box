@@ -1,7 +1,8 @@
 import React from 'react'
 import Axios from 'axios'
-import { Card, Col, Row } from 'antd'
+import { Card} from 'antd'
 import { Link } from 'react-router-dom'
+import '../index.css'
 
 const baseURL =
   process.env.NODE_ENV === 'production' ? 'here should be your production endpoint' : 'http://localhost:3000/api'
@@ -39,12 +40,12 @@ class Plans extends React.Component {
             }}
             to={`/places/${plan._id}`}
           >
-            <Card className="cardPlan" bordered={false} style={{ width: 300 }}>
-              <h2>{plan.name}</h2>
-              <p>{plan.price}</p>
-              <p>{plan.role}</p>
+            <Card bordered={false} style={{ width: 300, backgroundImage: `url(${plan.image})`, height: '400px', fontSize:'20px', backgroundPosition:'center', color:'white'}} >
+              <h1>{plan.name}</h1>
+              <p>Price:<br></br>{plan.price}</p>
+              <p>Type:<br></br>{plan.role}</p>
               <p>{plan.description}</p>
-              <img src={plan.image} alt="" />
+            
             </Card>
           </Link>
         </div>
@@ -54,9 +55,11 @@ class Plans extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="plans">
         <h1>plans</h1>
+        <div className='planes'>
         {this.cardPlan()}
+        </div>
       </div>
     )
   }

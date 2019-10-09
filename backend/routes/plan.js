@@ -8,10 +8,10 @@ router.get('/plans', (req, res, next) => {
     .catch(error => res.status(500).json({ error }))
 })
 
-router.get('/selectedPlan/:id', async(req, res, next)=>{
-const selectPlan = await Plan.findById(req.plan._id)
-res.status(201).json({selectPlan})
-})
+//router.get('/selectedPlan/:id', async(req, res, next)=>{
+//const selectPlan = await Plan.findById(req.plan._id)
+//res.status(201).json({selectPlan})
+//})
 
 router.get('/selectedPlan/:id', (req, res, next) => {
   //Plan.create(req.body)

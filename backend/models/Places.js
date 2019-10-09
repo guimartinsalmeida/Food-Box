@@ -5,7 +5,7 @@ const placeSchema = new Schema(
   {
     name: String,
     address: String,
-    location: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
@@ -13,6 +13,6 @@ const placeSchema = new Schema(
   { timestamps: true }
 )
 
-placeSchema.index({ location: '2dsphere' })
+
 
 module.exports = mongoose.model('Place', placeSchema)

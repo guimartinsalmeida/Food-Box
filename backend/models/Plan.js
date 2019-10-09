@@ -5,8 +5,13 @@ const planSchema = new Schema(
     name: String,
     price: Number,
     description: String,
-    image: String
+    image: String,
+    planes: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
   },
+
 
   {
     timestamps: true,

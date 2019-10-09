@@ -11,6 +11,13 @@ const PLACE_SERVICE = {
   },
   getPlace: async(places) => {
     return await SERVICE.get('/places', places)
+  },
+
+  onDelete: async(id)=>{
+    return await SERVICE.delete(`/places/${id}`)
+  },
+  onEdit: async(id, form)=>{
+    return await SERVICE.put(`/edit-places/${id}`, form)
   }
   //getAddress: async (userid) => {
     //return await SERVICE.get('/places', userid)
