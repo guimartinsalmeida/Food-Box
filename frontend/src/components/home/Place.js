@@ -118,10 +118,11 @@ class Place extends React.Component {
     return (
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <Layout>
-          <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-            <div className="logo" />
+          <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }} >
+           
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ lineHeight: '64px' }}>
               <Menu.Item key="3" onClick={this.onLogout}>
+               
                 Log out
               </Menu.Item>
             </Menu>
@@ -140,8 +141,10 @@ class Place extends React.Component {
                   justifyContent: 'space-around'
                 }}
               >
-                <Card style={{ width: 300, height: '400px', backgroundImage: `url(${unplan.image})` }}>
-                  <h1>{unplan.name}</h1>
+                <Card style={{ width: 300, height: '400px', backgroundPosition:'center', color:'white', backgroundImage: `url(${unplan.image})` }}>
+                  <div className='plan-place'>
+                    <div style={{fontSize:"20px"}}>
+                  <p>{unplan.name}</p>
                   <p>
                     Price:<br></br>
                     {unplan.price}
@@ -151,6 +154,8 @@ class Place extends React.Component {
                     {unplan.role}
                   </p>
                   <p>{unplan.description}</p>
+                    </div>
+                  </div>
                 </Card>
                 <div>{this.state.lugar}</div>
                 <div>

@@ -32,11 +32,12 @@ export default class Edit extends Component {
    
     const fd = new FormData()
     for (const key in this.state.place){fd.append(key, this.state.place[key])
-  
-      PLACE_SERVICE.onEdit(this.props.match.params.id,fd)
+      console.log('jjjjjj', this.props.match.params.id)
       
+      PLACE_SERVICE.onEdit(this.props.match.params.id,this.state.place)
+   
         .then(res => {
-         
+          
           this.props.history.push(`/plans`)
         })
         .catch(e => console.log(e));

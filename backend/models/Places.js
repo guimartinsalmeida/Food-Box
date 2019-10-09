@@ -8,7 +8,11 @@ const placeSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User'
-    }
+    },
+    date: {
+      type: Date,
+    
+    },
   },
   { timestamps: true }
 )

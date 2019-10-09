@@ -40,8 +40,9 @@ class Plans extends React.Component {
             }}
             to={`/places/${plan._id}`}
           >
-            <Card bordered={false} style={{ width: 300, backgroundImage: `url(${plan.image})`, height: '400px', fontSize:'20px', backgroundPosition:'center', color:'white'}} >
-              <h1>{plan.name}</h1>
+            <Card className='plan' bordered={false} style={{ width: 300, backgroundImage: `url(${plan.image})`, height: '400px', fontSize:'20px', backgroundPosition:'center', color:'white'}} >
+              
+              <p>{plan.name}</p>
               <p>Price:<br></br>{plan.price}</p>
               <p>Type:<br></br>{plan.role}</p>
               <p>{plan.description}</p>
@@ -56,7 +57,7 @@ class Plans extends React.Component {
   render() {
     return (
       <div className="plans">
-        <h1>plans</h1>
+        <h1>planes</h1>
         <div className='planes'>
         {this.cardPlan()}
         </div>

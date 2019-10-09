@@ -8,21 +8,21 @@ const Plans = [
     price: 400,
     role:'VEGAN',
     description: 'description de el plan',
-    image:'https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+    image:'https://res.cloudinary.com/dkc8vtsxn/image/upload/v1570638007/vegan_zshch1.jpg'
   },
   {
     name: 'Meat Plan',
     price: 400,
     role:'MEAT',
     description: 'description de el plan',
-    image:'la que sea'
+    image:'https://res.cloudinary.com/dkc8vtsxn/image/upload/v1570638019/meat_o2gmqs.jpg'
   },
   {
     name: 'Healthy Plan',
     price: 400,
     role:'HEALTHY',
     description: 'description de el plan',
-    image:'la que sea'
+    image:'https://res.cloudinary.com/dkc8vtsxn/image/upload/v1570638035/healthy_la3gdu.jpg'
   }
 
 

@@ -36,24 +36,11 @@ router.get('/', (req, res, next) => {
   res.status(200).json({ msg: 'Working' })
 })
 //place
-router.post('/places', (req, res, next) => {
-  const { name, address } = req.body
-  console.log('name, address...', name, address)
-  Place.create({ ...req.body, user: req.user._id })
-    .then(place => res.status(201).json({ place }))
-    .catch(error => res.status(500).json({ error }))
-})
 
 
 
 
-//pedido
-router.post('/pedidos', (req, res, next) => {
-  const { fecha, hora } = req.body
-  console.log('fecha, hora ...', fecha, hora)
-  Pedidos.create({ ...req.body })
-    .then(pedido => res.status(201).json({ pedido }))
-    .catch(error => res.status(500).json({ error }))
-})
+
+
 
 module.exports = router

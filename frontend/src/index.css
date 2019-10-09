@@ -15,6 +15,7 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  color: white;
 }
 
 .home {
@@ -29,16 +30,23 @@ code {
 
 .h1 {
   text-align: center;
-  font-size: 150px;
+  font-size: 140px;
   color: black;
+  text-shadow: 5px 5px rgb(235, 90, 103);
 }
 
 .food-box-card {
-  border: 1px solid black;
+  border: 1px solid white;
   padding: 20px;
   background-color: white;
   width: 600px;
   height: 400px;
+}
+
+.food-box-card h2 {
+  font-size: 50px;
+  font-weight: bolder;
+  text-shadow: 2px 2px rgb(235, 90, 103);
 }
 
 .food-box-card {
@@ -58,3 +66,49 @@ code {
 h1 {
   color: white;
 }
+
+img {
+  height: 230px;
+}
+
+.plans h1 {
+  font-size: 70px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  text-shadow: 3px 3px rgb(235, 90, 103);
+}
+
+.ant-card-bordered {
+  background-position: center;
+}
+
+.food-box-logo {
+  display: flex;
+}
+
+.logo-nav {
+  height: 80px;
+  width: 80px;
+}
+
+.h3 {
+  color: white;
+}
+
+.plan p:first-child {
+  font-size: 40px;
+}
+
+.plan {
+  text-shadow: 2px 2px 2px black;
+  font-size: 35px;
+}
+
+.plan-place p:first-child {
+  font-size: 40px;
+}
+
+.plan-place {
+  text-shadow: 2px 2px 2px black;
+}
+

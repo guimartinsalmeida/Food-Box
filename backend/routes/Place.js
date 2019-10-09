@@ -51,8 +51,11 @@ router.get('/places', (req, res, next) => {
 
 //no entendi porque usar put
 router.put('/edit-places/:id', (req, res, next) => {
+  console.log('kcjsbkj', req.body)
   Place.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
-    .then(place => res.status(200).json({ place }))
+  
+    .then( place => res.status(200).json({ place }))
+
     .catch(error => res.status(500).json({ error }))
 })
 
