@@ -7,7 +7,7 @@ import DATE_SERVICE, { pedidoService } from '../../services/post-date'
 
 
 const baseURL = process.env.NODE_ENV === 'production'
-  ? 'here should be your production endpoint'
+  ? 'https://vast-meadow-96941.herokuapp.com/api'
   :  'http://localhost:3000/api'
 
   class Pedido extends React.Component{

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import '../index.css'
 
 const baseURL =
-  process.env.NODE_ENV === 'production' ? 'here should be your production endpoint' : 'http://localhost:3000/api'
+  process.env.NODE_ENV === 'production' ? 'https://vast-meadow-96941.herokuapp.com/api' : 'http://localhost:3000/api'
 
 class Plans extends React.Component {
   state = {
