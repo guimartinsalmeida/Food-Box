@@ -8,8 +8,7 @@ import PLACE_SERVICE, { placeService } from '../../services/post-place'
 import AUTH_SERVICE from '../../services'
 const { Header, Content } = Layout
 
-const baseURL =
-  process.env.NODE_ENV === 'production' ? 'https://vast-meadow-96941.herokuapp.com/api' : 'http://localhost:3000/api'
+const baseURL = process.env.NODE_ENV === 'production' ? 'aqui va lo de production' : 'http://localhost:3000/api'
 
 class Place extends React.Component {
   state = {
@@ -30,12 +29,9 @@ class Place extends React.Component {
         console.log(err)
       })
 
-    Axios.get(`${baseURL}/places/`)
+    PLACE_SERVICE.getPlace()
       .then(res => {
-        let { places } = this.state
-        console.log('resasss',res)
-        this.setState({ places: res.data.place })
-        //console.log('este es el que quiere ver emiliano', res.data)
+        this.setState({ places: res.data })
       })
       .catch(err => {
         console.log(err)
@@ -50,14 +46,12 @@ class Place extends React.Component {
     console.log(e.target.name)
   }
 
-
   onDelete = async (id, index) => {
-    let{places} = this.state
+    let { places } = this.state
     await PLACE_SERVICE.onDelete(id)
-    places.splice(index, 1);
-    this.setState({places})
+    places.splice(index, 1)
+    this.setState({ places })
   }
-  
 
   onLogout = async () => {
     await AUTH_SERVICE.logOut()
@@ -67,12 +61,9 @@ class Place extends React.Component {
 
   onSubmit = e => {
     e.preventDefault()
-    Axios.get(`${baseURL}/places/${this.state.places.id}`) //
+    Axios.get(`${baseURL}/places/${this.state.places.id}`)
       .then(({ data }) => {
-        //
-        console.log('2222222222222222222222', data)
         this.setState({
-          //
           lugares: data.place,
           lugar: (
             <Card>
@@ -80,57 +71,44 @@ class Place extends React.Component {
               <p>{'kajcbikjbc'}</p>
             </Card>
           )
-        }) //
-      }) //
+        })
+      })
       .catch(err => {
-        //
-        console.log(err) //
-      }) //
+        console.log(err)
+      })
 
     let { user } = this.state
     console.log('onsubmit', user)
     placeService(user)
       .then(res => {
-        let {places} = this.state
+        let { places } = this.state
         places.push(res.place)
-        console.log('.......', res)
         this.setState({
-        places
+          places
         })
       })
 
       .catch(err => console.log('el error en onsubmit', err))
   }
 
-  cardPlace = () => {
-    const { places } = this.state
-    console.log('este es el id ', places[0])
- 
-    console.log(places)
-  }
+  
 
   render() {
     const { unplan } = this.state
     const { places } = this.state
-    console.log(this.state)
     if (!unplan) return <p>Loading data...</p>
-    //this.props.match.params.id
     return (
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <Layout>
-          <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }} >
-           
+          <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ lineHeight: '64px' }}>
               <Menu.Item key="3" onClick={this.onLogout}>
-               
                 Log out
               </Menu.Item>
             </Menu>
           </Header>
           <Content style={{ padding: '0 50px', marginTop: 64 }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Put your address to receive your food plan</Breadcrumb.Item>
-            </Breadcrumb>
+            <Breadcrumb style={{ margin: '16px 0' }}></Breadcrumb>
             <div>
               <div
                 style={{
@@ -141,44 +119,55 @@ class Place extends React.Component {
                   justifyContent: 'space-around'
                 }}
               >
-                <Card style={{ width: 300, height: '400px', backgroundPosition:'center', color:'white', backgroundImage: `url(${unplan.image})` }}>
-                  <div className='plan-place'>
-                    <div style={{fontSize:"20px"}}>
-                  <p>{unplan.name}</p>
-                  <p>
-                    Price:<br></br>
-                    {unplan.price}
-                  </p>
-                  <p>
-                    Tipo:<br></br>
-                    {unplan.role}
-                  </p>
-                  <p>{unplan.description}</p>
+                <Card
+                  style={{
+                    width: 300,
+                    height: '400px',
+                    backgroundPosition: 'center',
+                    color: 'white',
+                    backgroundImage: `url(${unplan.image})`
+                  }}
+                >
+                  <div className="plan-place">
+                    <div style={{ fontSize: '20px' }}>
+                      <p>{unplan.name}</p>
+                      <p>
+                        Precio:<br></br>
+                        {unplan.price}
+                      </p>
+                      <p>
+                        Tipo:<br></br>
+                        {unplan.role}
+                      </p>
+                      <p>{unplan.description}</p>
                     </div>
                   </div>
                 </Card>
                 <div>{this.state.lugar}</div>
                 <div>
-                {places.length ? 
-                    places.map((place, i) => 
+                  {places.length ? (
+                    places.map((place, i) => (
                       <div key={i} style={{ background: '#ECECEC', padding: '30px' }}>
                         <Card bordered={false} style={{ width: 300 }}>
-                          <h1>{place.name}</h1>
+                          <p>{place.name}</p>
                           <p>{place.address}</p>
                           <button type="delete" id={place.id} key="delete" onClick={() => this.onDelete(place._id, i)}>
                             delete
                           </button>
-                          <Link to={`/edit/${place._id}`}>  <button type="edit" id={place.id} key="edit">
-                          Edit 
-                          </button> </Link>
+                          <Link to={`/edit/${place._id}`}>
+                            {' '}
+                            <button type="edit" id={place.id} key="edit">
+                              Edit
+                            </button>{' '}
+                          </Link>
                         </Card>
                       </div>
-                    )
-                   : 
-                    <div>
-                      <span>no hay nada mijo</span>
+                    ))
+                  ) : (
+                    <div className="span">
+                      <span>Por favor, pongan una direccion para que podamos enviar tu plan escojido</span>
                     </div>
-                }
+                  )}
                 </div>
               </div>
 
@@ -204,9 +193,6 @@ class Place extends React.Component {
                   </Form.Item>
                 </Form.Item>
               </Form>
-              <Link to={`/pedidoCreate/${unplan._id}`}>
-                <button>Add</button>
-              </Link>
             </div>
           </Content>
         </Layout>

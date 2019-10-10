@@ -1,17 +1,17 @@
 import axios from 'axios'
-const baseURL = 'https://vast-meadow-96941.herokuapp.com'
+const baseURL = 'http://localhost:3000/api'
 
 const SERVICE = axios.create({ withCredentials: true, baseURL })
 
 const DATE_SERVICE = {
   postdate: async user => {
-    return await SERVICE.post('/api/pedidos', )
+    return await SERVICE.post('/pedidos', )
   },
 }
 
 export const pedidoService = data => {
   console.log('data', data)
-  return SERVICE.post('/api/places', data)
+  return SERVICE.post('/pedidos', data)
     .then(response => response.data)
     .catch(err => {
       throw err

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = 'https://vast-meadow-96941.herokuapp.com'
+const baseURL = 'http://localhost:3000'
 
 const SERVICE = axios.create({ baseURL, withCredentials: true })
 
@@ -9,19 +9,19 @@ const PLACE_SERVICE = {
     console.log(places)
     return await SERVICE.post('api/places', places)
   },
-  getPlace: async(places) => {
-    return await SERVICE.get('api/places', places)
+  getPlace: async () => {
+    return await SERVICE.get('api/places')
   },
 
-  onDelete: async(id)=>{
+  onDelete: async id => {
     return await SERVICE.delete(`api/places/${id}`)
   },
-  onEdit: async(id, form)=>{
+  onEdit: async (id, form) => {
     return await SERVICE.put(`api/edit-places/${id}`, form)
+  },
+  onSendDate: async form => {
+    return await SERVICE.post('/pedido-create', form)
   }
-  //getAddress: async (userid) => {
-    //return await SERVICE.get('/places', userid)
-  //},
 }
 
 export const placeService = data => {

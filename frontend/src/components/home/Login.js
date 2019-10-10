@@ -20,12 +20,10 @@ class Login extends Component {
     AUTH_SERVICE.login(this.state.user)
       .then(response => {
         localStorage.setItem('user', JSON.stringify(response.data.user))
-        //this.context.logUser(response.data.user)
         let plan = JSON.parse(localStorage.getItem('plan'))
         this.props.history.push(`/places/${plan}`)
       })
       .catch(error => {
-        console.log(error)
       })
   }
 
@@ -56,7 +54,7 @@ class Login extends Component {
            
           </Form>
           <a href="/signup">
-             <button>vete a hacer signup</button>
+             <button>Signup</button>
            </a>
         </Card>
         

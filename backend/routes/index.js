@@ -1,5 +1,4 @@
 const router = require('express').Router()
-//const router = express.Router()
 const User = require('../models/User')
 const passport = require('../config/passport')
 const Place = require('../models/Places')
@@ -35,7 +34,7 @@ function isAuth(req, res, next) {
 router.get('/', (req, res, next) => {
   res.status(200).json({ msg: 'Working' })
 })
-//place
+
 
 
 

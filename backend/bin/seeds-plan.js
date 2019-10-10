@@ -7,21 +7,21 @@ const Plans = [
     name: 'Vegan Plan',
     price: 400,
     role:'VEGAN',
-    description: 'description de el plan',
+    description: 'Este plan envia opciones diversas de recetas veganas ',
     image:'https://res.cloudinary.com/dkc8vtsxn/image/upload/v1570638007/vegan_zshch1.jpg'
   },
   {
     name: 'Meat Plan',
     price: 400,
     role:'MEAT',
-    description: 'description de el plan',
+    description: 'El plan perfecto para quien le gusta apreciar platos con cortes de carnes',
     image:'https://res.cloudinary.com/dkc8vtsxn/image/upload/v1570638019/meat_o2gmqs.jpg'
   },
   {
     name: 'Healthy Plan',
     price: 400,
     role:'HEALTHY',
-    description: 'description de el plan',
+    description: 'Este plan te envia platos planeados para que tengas una alimentación balanceada',
     image:'https://res.cloudinary.com/dkc8vtsxn/image/upload/v1570638035/healthy_la3gdu.jpg'
   }
 

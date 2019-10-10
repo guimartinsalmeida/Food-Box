@@ -52,6 +52,15 @@ code {
 .food-box-card {
   margin-top: -10vh;
   margin-right: 10vh;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lobster', cursive;
+  font-family: 'Special Elite', cursive;
+  font-size: 20px;
 }
 
 .plans {
@@ -112,3 +121,37 @@ img {
   text-shadow: 2px 2px 2px black;
 }
 
+.span span {
+  text-align: center;
+}
+
+.ant-layout,
+.ant-layout {
+  font-weight: bold;
+}
+
+.pedido-plan {
+  text-shadow: 2px 2px 2px black;
+}
+
+.pedido-plan p:first-child {
+  font-size: 40px;
+}
+
+.pedido-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #eff3f6;
+}
+
+.p-pedido {
+  font-size: 50px;
+}
+
+.image-pedido {
+  height: 220px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Lobster|Special+Elite&display=swap');

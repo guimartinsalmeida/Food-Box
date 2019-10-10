@@ -19,10 +19,10 @@ class Signup extends Component {
     AUTH_SERVICE.signup(this.state.user)
       .then((response) => {
         this.props.history.push("/login");
-        console.log(response.data);
+       
       })
       .catch((error) => {
-        console.log(error);
+        //
       });
   };
 

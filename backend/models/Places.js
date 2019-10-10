@@ -9,10 +9,7 @@ const placeSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    date: {
-      type: Date,
     
-    },
   },
   { timestamps: true }
 )
